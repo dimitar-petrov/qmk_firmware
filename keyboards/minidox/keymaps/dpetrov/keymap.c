@@ -1,0 +1,230 @@
+#include QMK_KEYBOARD_H
+
+extern keymap_config_t keymap_config;
+
+enum my_layers {
+                _AREN,
+                /* _BGPHON, */
+                _SYS,
+                _NAV,
+                _NUM_E,
+                _SYM
+};
+
+enum my_keycodes {
+                  AREN = SAFE_RANGE,
+                  /* BGPHON, */
+                  SYS,
+                  NAV,
+                  NUM_E,
+                  SYM
+};
+
+#define ALT_E LALT_T(KC_E)
+#define ALT_I LALT_T(KC_I)
+#define CTRL_R LCTL_T(KC_R)
+#define CTRL_T LCTL_T(KC_T)
+#define GUI_N LGUI_T(KC_N)
+#define GUI_S LGUI_T(KC_S)
+#define NAV_SP LT(_NAV, KC_SPC)
+#define NAV_LK TG(_NAV)
+#define NAV_OS OSL(_NAV)
+#define NUME_ENT LT(_NUM_E, KC_ENT)
+#define NUME OSL(_NUM_E)
+#define NUMLK_E TG(_NUM_E)
+/* #define SFT_A LSFT_T(KC_A) */
+/* #define SFT_O LSFT_T(KC_O) */
+#define SFT_SLASH LSFT_T(KC_SLASH)
+#define SFT_BS LSFT_T(KC_BSPC)
+#define SFT_OS OSM(MOD_LSFT)
+/* #define SYM_COMM LT(_SYM, KC_COMMA) */
+/* #define SYM_U LT(_SYM, KC_U) */
+#define SYM_SPC LT(_SYM, KC_SPC)
+#define SYM_OS OSL(_SYM)
+#define SYS_Z LT(_SYS, KC_Z)
+#define VOL_DN S(LALT(KC__VOLDOWN))
+#define VOL_UP S(LALT(KC__VOLUP))
+
+/* enum unicode_names { */
+/*     BG_a, */
+/*     BG_A, */
+/*     BG_b, */
+/*     BG_B, */
+/*     BG_v, */
+/*     BG_V, */
+/*     BG_f, */
+/*     BG_F, */
+/*     BG_d, */
+/*     BG_D, */
+/*     BG_e, */
+/*     BG_E, */
+/*     BG_j, */
+/*     BG_J, */
+/* }; */
+
+
+/* const uint32_t PROGMEM unicode_map[] = { */
+/*     [BG_a] = 0xa0, */
+/*     [BG_A] = 0xa1, */
+/*     [BG_b] = 0xa2, */
+/*     [BG_B] = 0xa3, */
+/*     [BG_f] = 0x0444, */
+/*     [BG_F] = 0x0424, */
+/* }; */
+
+const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+
+/* AREN
+ *
+ * ,----------------------------------.           ,----------------------------------.
+ * |   Q  |   L  |   ,  |   P  |   |  |           |   -  |   F  |   U  |   D  |   K  |
+ * |------+------+------+------+------|           |------+------+------+------+------|
+ * |   A  | CTL/R| ALT/E| GUI/N|   B  |           |   G  | GUI/S| ALT/I| CTL/T|   O  |
+ * |------+------+------+------+------|           |------+------+------+------+------|
+ * | SYS/Z|   W  |   .  |   H  |   J  |           |   V  |   C  |   Y  |   M  |   X  |
+ * `----------------------------------'           `----------------------------------'
+ *                  ,--------------------.    ,--------------------.
+ *                  | SFT//|NV/SPC|      |    |      |  SYM |SFT/BS|
+ *                  `------+------|NU/ENT|    | ESC  |------+------'
+ *                                |      |    |      |
+ *                                `------'    `------'
+ */
+[_AREN] = LAYOUT( \
+  KC_Q,  KC_L,   KC_COMMA,  KC_P,   KC_PIPE,        KC_MINS, KC_F,   KC_U,   KC_D,   KC_K, \
+  KC_A,  CTRL_R, ALT_E,     GUI_N,  KC_B,           KC_G,    GUI_S,  ALT_I,  CTRL_T, KC_O, \
+  SYS_Z, KC_W,   KC_DOT,    KC_H,   KC_J,           KC_V,    KC_C,   KC_Y,   KC_M,   KC_X, \
+                 SFT_SLASH, NAV_SP, NUME_ENT,       KC_ESC,  SYM_OS, SFT_BS                \
+),
+
+/* BGPHON
+ *
+ * ,----------------------------------.           ,----------------------------------.
+ * |   Q  |   L  |   ,  |   P  |   /  |           |   -  |   F  |   U  |   D  |   K  |
+ * |------+------+------+------+------|           |------+------+------+------+------|
+ * |   A  | CTL/R| ALT/E| GUI/N|   B  |           |   G  | GUI/S| ALT/I| CTL/T| SFT/O|
+ * |------+------+------+------+------|           |------+------+------+------+------|
+ * | SYS/Z|   W  |   .  |   H  |   J  |           |   V  |   C  |   Y  |   M  |   X  |
+ * `----------------------------------'           `----------------------------------'
+ *                  ,--------------------.    ,--------------------.
+ *                  |SFT/OS|NV/ESC|      |    |      | DK/SP|SFT/OS|
+ *                  `------+------|SYM/OS|    |SYM/OS|------+------'
+ *                                |      |    |      |
+ *                                `------'    `------'
+ */
+/* [_BGPHON] = LAYOUT( \ */
+/*   KC_Q,     KC_L,   KC_COMMA, KC_P,   KC_SLASH,       KC_MINS, KC_F,     KC_U,  KC_D,   KC_K,  \ */
+/*   XP(0, 1), CTRL_R, ALT_E,    GUI_N,  XP(2, 3),           KC_G,    GUI_S,    ALT_I, CTRL_T, SFT_O, \ */
+/*   SYS_Z,    KC_W,   KC_DOT,   KC_H,   KC_J,           KC_V,    KC_C,     KC_Y,  KC_M,   KC_X,  \ */
+/*                     SFT_OS,   NAV_BK, SYM_ESC,        SYM_ENT, NUME_SPC, SFT_OS                \ */
+/* ), */
+
+/* System, media, and layer lock keys
+ *
+ * ,----------------------------------.           ,----------------------------------.
+ * | RESET|DEBUG |KC_APP|      | AREN |           |      | VOL--| VOL++|BRITE-|BRITE+|
+ * |------+------+------+------+------|           |------+------+------+------+------|
+ * | SHIFT| CTRL |  ALT |  GUI |NAV LK|           | POWER| VOL- | VOL+ | MUTE | MPLY |
+ * |------+------+------+------+------|           |------+------+------+------+------|
+ * |      |      |AU OFF| AU ON|      |           |      |NUM LK| MRWD | MFFD |      |
+ * `----------------------------------'           `----------------------------------'
+ *                  ,--------------------.    ,------,-------------.
+ *                  |      |      |      |    |      |      |      |
+ *                  `-------------|      |    |      |------+------.
+ *                                |      |    |      |
+ *                                `------'    `------'
+ */
+[_SYS] = LAYOUT( \
+  RESET,   DEBUG,   KC_APP, _______, AREN,           _______,  KC_VOLD, KC_VOLU, KC_BRID,  KC_BRIU, \
+  KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, NAV_LK,        KC_POWER, VOL_DN,  VOL_UP,  KC__MUTE, KC_MPLY, \
+  _______, _______, AU_OFF,  AU_ON,   _______,       _______,  NUMLK_E, KC_MRWD, KC_MFFD,  _______, \
+                    _______, _______, _______,       _______,  _______, _______                     \
+),
+
+/* Navigation + mouse keys
+ *
+ * ,----------------------------------.           ,----------------------------------.
+ * | PSCR |      | WH U | WH D |      |           | BSPC | PGDN | PGUP | HOME |  END |
+ * |------+------+------+------+------|           |------+------+------+------+------|
+ * | SHIFT| CTRL |  ALT |  GUI |NAV LK|           | CAPS | LEFT | DOWN |  UP  | RIGHT|
+ * |------+------+------+------+------|           |------+------+------+------+------|
+ * |      | ACL0 | ACL1 | ACL2 | BTN2 |           | BTN1 | MS L | MS D | MS U | MS R |
+ * `----------------------------------'           `----------------------------------'
+ *                  ,--------------------.    ,--------------------.
+ *                  |      |      |      |    |      | TAB  |      |
+ *                  `------+------|  ESC |    | DEL  |------+------'
+ *                                |      |    |      |
+ *                                `------'    `------'
+ */
+[_NAV] = LAYOUT( \
+  KC_PSCR, _______, KC_WH_U, KC_WH_D, _______,       KC_BSPC, KC_PGDN, KC_PGUP, KC_HOME, KC_END,  \
+  KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, NAV_LK,        KC_CAPS, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, \
+  _______, KC_ACL0, KC_ACL1, KC_ACL2, KC_BTN2,       KC_BTN1, KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, \
+                    _______, _______, KC_ESC,        KC_DEL,  KC_TAB,  _______                    \
+),
+
+/* Number + function keys (ergonomic number order - default pairing with Arensito)
+ *
+ * ,----------------------------------.           ,----------------------------------.
+ * |  F1  |  F2  |  F3  |  F4  |  F5  |           |  F6  |  F7  |  F8  |  F9  |  F10 |
+ * |------+------+------+------+------|           |------+------+------+------+------|
+ * |   7  |   5  |   3  |   1  |   9  |           |   8  |   0  |   2  |   4  |   6  |
+ * |------+------+------+------+------|           |------+------+------+------+------|
+ * |  F11 |  F12 |   .  | SPACE| BSPC |           |  DEL |NUM LK|INSERT|      |   /  |
+ * `----------------------------------'           `----------------------------------'
+ *                  ,--------------------.    ,--------------------.
+ *                  |SFT/OS| TAB  |      |    |      |      |      |
+ *                  `------+------|  ESC |    |      |------+------'
+ *                                |      |    |      |
+ *                                `------'    `------'
+ */
+[_NUM_E] = LAYOUT( \
+  KC_F1,  KC_F2,  KC_F3,   KC_F4,  KC_F5,         KC_F6,  KC_F7,   KC_F8,  KC_F9,   KC_F10,  \
+  KC_7,   KC_5,   KC_3,    KC_1,   KC_9,          KC_8,   KC_0,    KC_2,   KC_4,    KC_6,    \
+  KC_F11, KC_F12, KC_DOT,  KC_SPC, KC_BSPC,       KC_DEL, NUMLK_E, KC_INS, _______, KC_SLSH, \
+                   SFT_OS, KC_TAB, KC_ESC,        _______, _______, _______                  \
+),
+
+/* Symbols
+ *
+ * ,----------------------------------.           ,----------------------------------.
+ * |   !  |   @  |   #  |   $  |   %  |           |   ^  |   &  |   *  |   ?  |   '  |
+ * |------+------+------+------+------|           |------+------+------+------+------|
+ * |   +  |   }  |   ]  |   )  |   "  |           |   :  |   (  |   [  |   {  |   =  |
+ * |------+------+------+------+------|           |------+------+------+------+------|
+ * |   _  |   |  |   -  |   >  |   \  |           |   `  |   <  |   /  |   ~  |   ;  |
+ * `----------------------------------'           `----------------------------------'
+ *                  ,--------------------.    ,--------------------.
+ *                  |      |      |      |    |      |      |      |
+ *                  `------+------|      |    |      |------+------'
+ *                                |      |    |      |
+ *                                `------'    `------'
+ */
+[_SYM] = LAYOUT( \
+  KC_EXLM,  KC_AT,   KC_HASH, KC_DLR,  KC_PERC,       KC_CIRC, KC_AMPR, KC_ASTR, KC_QUES, KC_QUOT,  \
+  KC_PLUS,  KC_RCBR, KC_RBRC, KC_RPRN, KC_DQT,        KC_COLN, KC_LPRN, KC_LBRC, KC_LCBR, KC_EQUAL, \
+  KC_UNDS,  KC_PIPE, KC_MINS, KC_GT,   KC_BSLS,       KC_GRV,  KC_LT,   KC_SLSH, KC_TILD, KC_SCLN,  \
+                     _______, _______, _______,       _______, _______, _______                     \
+)
+
+};
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+    case AREN:
+        if (record->event.pressed) {
+            set_single_persistent_default_layer(_AREN);
+        }
+        return false;
+    /* case BGPHON: */
+    /*     if (record->event.pressed) { */
+    /*         set_single_persistent_default_layer(_BGPHON); */
+    /*     } */
+    /*     return false; */
+    default:
+        return true;
+    }
+};
+
+/* void eeconfig_init_user(void) { */
+/*     set_unicode_input_mode(UC_LNX); */
+/* } */
