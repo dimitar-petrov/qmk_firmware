@@ -4,7 +4,6 @@ extern keymap_config_t keymap_config;
 
 enum my_layers {
                 _AREN,
-                /* _BGPHON, */
                 _SYS,
                 _NAV,
                 _NUM_E,
@@ -13,7 +12,6 @@ enum my_layers {
 
 enum my_keycodes {
                   AREN = SAFE_RANGE,
-                  /* BGPHON, */
                   SYS,
                   NAV,
                   NUM_E,
@@ -45,39 +43,13 @@ enum my_keycodes {
 #define VOL_DN S(LALT(KC__VOLDOWN))
 #define VOL_UP S(LALT(KC__VOLUP))
 
-/* enum unicode_names { */
-/*     BG_a, */
-/*     BG_A, */
-/*     BG_b, */
-/*     BG_B, */
-/*     BG_v, */
-/*     BG_V, */
-/*     BG_f, */
-/*     BG_F, */
-/*     BG_d, */
-/*     BG_D, */
-/*     BG_e, */
-/*     BG_E, */
-/*     BG_j, */
-/*     BG_J, */
-/* }; */
-
-
-/* const uint32_t PROGMEM unicode_map[] = { */
-/*     [BG_a] = 0xa0, */
-/*     [BG_A] = 0xa1, */
-/*     [BG_b] = 0xa2, */
-/*     [BG_B] = 0xa3, */
-/*     [BG_f] = 0x0444, */
-/*     [BG_F] = 0x0424, */
-/* }; */
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* AREN
  *
  * ,----------------------------------.           ,----------------------------------.
- * |   Q  |   L  |   ,  |   P  |   |  |           |   -  |   F  |   U  |   D  |   K  |
+ * |   Q  |   L  |   ,  |   P  |   \  |           |   -  |   F  |   U  |   D  |   K  |
  * |------+------+------+------+------|           |------+------+------+------+------|
  * |   A  | CTL/R| ALT/E| GUI/N|   B  |           |   G  | GUI/S| ALT/I| CTL/T|   O  |
  * |------+------+------+------+------|           |------+------+------+------+------|
@@ -90,54 +62,32 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                `------'    `------'
  */
 [_AREN] = LAYOUT( \
-  KC_Q,  KC_L,   KC_COMMA,  KC_P,   KC_PIPE,        KC_MINS, KC_F,   KC_U,   KC_D,   KC_K, \
+  KC_Q,  KC_L,   KC_COMMA,  KC_P,   KC_BSLS,        KC_MINS, KC_F,   KC_U,   KC_D,   KC_K, \
   KC_A,  CTRL_R, ALT_E,     GUI_N,  KC_B,           KC_G,    GUI_S,  ALT_I,  CTRL_T, KC_O, \
   SYS_Z, KC_W,   KC_DOT,    KC_H,   KC_J,           KC_V,    KC_C,   KC_Y,   KC_M,   KC_X, \
                  SFT_SLASH, NAV_SP, NUME_ENT,       KC_ESC,  SYM_OS, SFT_BS                \
 ),
 
-/* BGPHON
- *
- * ,----------------------------------.           ,----------------------------------.
- * |   Q  |   L  |   ,  |   P  |   /  |           |   -  |   F  |   U  |   D  |   K  |
- * |------+------+------+------+------|           |------+------+------+------+------|
- * |   A  | CTL/R| ALT/E| GUI/N|   B  |           |   G  | GUI/S| ALT/I| CTL/T| SFT/O|
- * |------+------+------+------+------|           |------+------+------+------+------|
- * | SYS/Z|   W  |   .  |   H  |   J  |           |   V  |   C  |   Y  |   M  |   X  |
- * `----------------------------------'           `----------------------------------'
- *                  ,--------------------.    ,--------------------.
- *                  |SFT/OS|NV/ESC|      |    |      | DK/SP|SFT/OS|
- *                  `------+------|SYM/OS|    |SYM/OS|------+------'
- *                                |      |    |      |
- *                                `------'    `------'
- */
-/* [_BGPHON] = LAYOUT( \ */
-/*   KC_Q,     KC_L,   KC_COMMA, KC_P,   KC_SLASH,       KC_MINS, KC_F,     KC_U,  KC_D,   KC_K,  \ */
-/*   XP(0, 1), CTRL_R, ALT_E,    GUI_N,  XP(2, 3),           KC_G,    GUI_S,    ALT_I, CTRL_T, SFT_O, \ */
-/*   SYS_Z,    KC_W,   KC_DOT,   KC_H,   KC_J,           KC_V,    KC_C,     KC_Y,  KC_M,   KC_X,  \ */
-/*                     SFT_OS,   NAV_BK, SYM_ESC,        SYM_ENT, NUME_SPC, SFT_OS                \ */
-/* ), */
-
 /* System, media, and layer lock keys
  *
  * ,----------------------------------.           ,----------------------------------.
- * | RESET|DEBUG |KC_APP|      | AREN |           |      | VOL--| VOL++|BRITE-|BRITE+|
+ * | RESET|DEBUG |      |      | AREN |           |      | VOL--| VOL++|BRITE-|BRITE+|
  * |------+------+------+------+------|           |------+------+------+------+------|
  * | SHIFT| CTRL |  ALT |  GUI |NAV LK|           | POWER| VOL- | VOL+ | MUTE | MPLY |
  * |------+------+------+------+------|           |------+------+------+------+------|
  * |      |      |AU OFF| AU ON|      |           |      |NUM LK| MRWD | MFFD |      |
  * `----------------------------------'           `----------------------------------'
  *                  ,--------------------.    ,------,-------------.
- *                  |      |      |      |    |      |      |      |
+ *                  |      |      |      |    |KC_APP|      |      |
  *                  `-------------|      |    |      |------+------.
  *                                |      |    |      |
  *                                `------'    `------'
  */
 [_SYS] = LAYOUT( \
-  RESET,   DEBUG,   KC_APP, _______, AREN,           _______,  KC_VOLD, KC_VOLU, KC_BRID,  KC_BRIU, \
+  RESET,   DEBUG,   _______, _______, AREN,           _______,  KC_VOLD, KC_VOLU, KC_BRID,  KC_BRIU, \
   KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, NAV_LK,        KC_POWER, VOL_DN,  VOL_UP,  KC__MUTE, KC_MPLY, \
   _______, _______, AU_OFF,  AU_ON,   _______,       _______,  NUMLK_E, KC_MRWD, KC_MFFD,  _______, \
-                    _______, _______, _______,       _______,  _______, _______                     \
+                    _______, _______, _______,       KC_APP,  _______, _______                     \
 ),
 
 /* Navigation + mouse keys
@@ -165,23 +115,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Number + function keys (ergonomic number order - default pairing with Arensito)
  *
  * ,----------------------------------.           ,----------------------------------.
- * |  F1  |  F2  |  F3  |  F4  |  F5  |           |  F6  |  F7  |  F8  |  F9  |  F10 |
- * |------+------+------+------+------|           |------+------+------+------+------|
- * |   7  |   5  |   3  |   1  |   9  |           |   8  |   0  |   2  |   4  |   6  |
- * |------+------+------+------+------|           |------+------+------+------+------|
- * |  F11 |  F12 |   .  | SPACE| BSPC |           |  DEL |NUM LK|INSERT|      |   /  |
+ * |      |  F7  |  F8  |  F9  |  F10 |           |   -  |   7  |   8  |   9  |   +  |
+ * |------|------+------+------+------+           |------+------+------+------+------|
+ * |      |  F4  |  F5  |  F6  |  F11 |           |   .  |   4  |   5  |   6  |   =  |
+ * |------|------+------+------+------+           |------+------+------+------+------|
+ * |      |  F1  |  F2  |  F3  |  F12 |           | NMLK |   1  |   2  |   3  |  INS |
  * `----------------------------------'           `----------------------------------'
  *                  ,--------------------.    ,--------------------.
- *                  |SFT/OS| TAB  |      |    |      |      |      |
- *                  `------+------|  ESC |    |      |------+------'
+ *                  |      |      |      |    |      |  0   |      |
+ *                  `------+------|      |    |      |------+------'
  *                                |      |    |      |
  *                                `------'    `------'
  */
 [_NUM_E] = LAYOUT( \
-  KC_F1,  KC_F2,  KC_F3,   KC_F4,  KC_F5,         KC_F6,  KC_F7,   KC_F8,  KC_F9,   KC_F10,  \
-  KC_7,   KC_5,   KC_3,    KC_1,   KC_9,          KC_8,   KC_0,    KC_2,   KC_4,    KC_6,    \
-  KC_F11, KC_F12, KC_DOT,  KC_SPC, KC_BSPC,       KC_DEL, NUMLK_E, KC_INS, _______, KC_SLSH, \
-                   SFT_OS, KC_TAB, KC_ESC,        _______, _______, _______                  \
+  _______, KC_F7, KC_F8, KC_F9, KC_F10,           KC_MINS, KC_7, KC_8, KC_9, KC_PLUS, \
+  _______, KC_F4, KC_F5, KC_F6, KC_F11,           KC_DOT,  KC_4, KC_5, KC_6, KC_EQUAL, \
+  _______, KC_F1, KC_F2, KC_F3, KC_F12,           NUMLK_E, KC_1, KC_2, KC_3, KC_INS, \
+             _______, _______, _______,           _______, KC_0, _______               \
 ),
 
 /* Symbols
@@ -189,9 +139,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,----------------------------------.           ,----------------------------------.
  * |   !  |   @  |   #  |   $  |   %  |           |   ^  |   &  |   *  |   ?  |   '  |
  * |------+------+------+------+------|           |------+------+------+------+------|
- * |   +  |   }  |   ]  |   )  |   "  |           |   :  |   (  |   [  |   {  |   =  |
+ * |   +  |   {  |   [  |   (  |   "  |           |   :  |   )  |   ]  |   }  |   =  |
  * |------+------+------+------+------|           |------+------+------+------+------|
- * |   _  |   |  |   -  |   >  |   \  |           |   `  |   <  |   /  |   ~  |   ;  |
+ * |   _  |   |  |   -  |   <  |   \  |           |   /  |   >  |   `  |   ~  |   ;  |
  * `----------------------------------'           `----------------------------------'
  *                  ,--------------------.    ,--------------------.
  *                  |      |      |      |    |      |      |      |
@@ -201,8 +151,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_SYM] = LAYOUT( \
   KC_EXLM,  KC_AT,   KC_HASH, KC_DLR,  KC_PERC,       KC_CIRC, KC_AMPR, KC_ASTR, KC_QUES, KC_QUOT,  \
-  KC_PLUS,  KC_RCBR, KC_RBRC, KC_RPRN, KC_DQT,        KC_COLN, KC_LPRN, KC_LBRC, KC_LCBR, KC_EQUAL, \
-  KC_UNDS,  KC_PIPE, KC_MINS, KC_GT,   KC_BSLS,       KC_GRV,  KC_LT,   KC_SLSH, KC_TILD, KC_SCLN,  \
+  KC_PLUS,  KC_LCBR, KC_LBRC, KC_LPRN, KC_DQT,        KC_COLN, KC_RPRN, KC_RBRC, KC_RCBR, KC_EQUAL, \
+  KC_UNDS,  KC_PIPE, KC_MINS, KC_LT,   KC_BSLS,       KC_SLSH, KC_GT,   KC_GRV,  KC_TILD, KC_SCLN,  \
                      _______, _______, _______,       _______, _______, _______                     \
 )
 
@@ -215,16 +165,29 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             set_single_persistent_default_layer(_AREN);
         }
         return false;
-    /* case BGPHON: */
-    /*     if (record->event.pressed) { */
-    /*         set_single_persistent_default_layer(_BGPHON); */
-    /*     } */
-    /*     return false; */
     default:
         return true;
     }
 };
 
-/* void eeconfig_init_user(void) { */
-/*     set_unicode_input_mode(UC_LNX); */
-/* } */
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+         case LSFT_T(KC_SLASH):
+            return TAPPING_TERM - 25;
+        case LSFT_T(KC_BSPC):
+            return TAPPING_TERM - 25;
+        default:
+            return TAPPING_TERM - 25;
+    }
+}
+
+bool get_ignore_mod_tap_interrupt(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+         case LSFT_T(KC_SLASH):
+	   return false;
+        case LSFT_T(KC_BSPC):
+	   return false;
+        default:
+	   return true;
+    }
+}
