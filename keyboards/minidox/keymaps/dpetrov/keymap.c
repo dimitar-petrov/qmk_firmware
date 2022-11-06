@@ -49,7 +49,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* AREN
  *
  * ,----------------------------------.           ,----------------------------------.
- * |   Q  |   L  |   ,  |   P  |   \  |           |   -  |   F  |   U  |   D  |   K  |
+ * |   Q  |   L  |   ,  |   P  |   |  |           |   -  |   F  |   U  |   D  |   K  |
  * |------+------+------+------+------|           |------+------+------+------+------|
  * |   A  | CTL/R| ALT/E| GUI/N|   B  |           |   G  | GUI/S| ALT/I| CTL/T|   O  |
  * |------+------+------+------+------|           |------+------+------+------+------|
@@ -62,7 +62,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                `------'    `------'
  */
 [_AREN] = LAYOUT( \
-  KC_Q,  KC_L,   KC_COMMA,  KC_P,   KC_BSLS,        KC_MINS, KC_F,   KC_U,   KC_D,   KC_K, \
+  KC_Q,  KC_L,   KC_COMMA,  KC_P,   KC_PIPE,        KC_MINS, KC_F,   KC_U,   KC_D,   KC_K, \
   KC_A,  CTRL_R, ALT_E,     GUI_N,  KC_B,           KC_G,    GUI_S,  ALT_I,  CTRL_T, KC_O, \
   SYS_Z, KC_W,   KC_DOT,    KC_H,   KC_J,           KC_V,    KC_C,   KC_Y,   KC_M,   KC_X, \
                  SFT_SLASH, NAV_SP, NUME_ENT,       KC_ESC,  SYM_OS, SFT_BS                \

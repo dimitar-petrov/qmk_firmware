@@ -1,5 +1,6 @@
 EXTRAKEY_ENABLE = yes
 MOUSEKEY_ENABLE = yes
+# AUTO_SHIFT_ENABLE = yes
 # Unicode for BG does not work
 # UNICODE_ENABLE = yes
 # UNICODEMAP_ENABLE = yes
