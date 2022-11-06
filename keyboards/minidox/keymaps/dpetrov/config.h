@@ -9,6 +9,7 @@
 #define TAPPING_TERM_KEY
 #define PERMISSIVE_HOLD
 #define IGNORE_MOD_TAP_INTERRUPT_PER_KEY
+/* #define AUTO_SHIFT_TIMEOUT 150 */
 
 // optional configuration:
 
